@@ -19,9 +19,24 @@ namespace GoingTo_API_DP.Persistence.Repositories
             await _context.Visits.AddAsync(visit);
         }
 
+        public async Task AssignVisit(int tripId, int locatableId)
+        {
+            Visit visit = await FindByTripIdAndLocatableId(tripId, locatableId);
+            if (visit == null)
+            {
+                visit = new Visit { TripId = tripId, LocatableId = locatableId };
+                await AddAsync(visit);
+            }
+        }
+
         public async Task<Visit> FindById(int id)
         {
             return await _context.Visits.FindAsync(id);
+        }
+
+        public async Task<Visit> FindByTripIdAndLocatableId(int tripId, int locatableId)
+        {
+            return await _context.Visits.FindAsync(tripId, locatableId);
         }
 
         public async Task<IEnumerable<Visit>> ListAsync()
@@ -39,6 +54,15 @@ namespace GoingTo_API_DP.Persistence.Repositories
         public void Remove(Visit visit)
         {
             _context.Visits.Remove(visit);
+        }
+
+        public async Task UnassignVisit(int tripId, int locatableId)
+        {
+            Visit visit = await FindByTripIdAndLocatableId(tripId, locatableId);
+            if (visit != null)
+            {
+                Remove(visit);
+            }
         }
 
         public void Update(Visit visit)

@@ -173,7 +173,8 @@ namespace GoingTo_API_DP.Domain.Persistence.Context
             builder.Entity<Visit>().ToTable("Visits");
             builder.Entity<Visit>().HasKey(p => p.Id);
             builder.Entity<Visit>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
-            
+            builder.Entity<Visit>().HasKey(p => new { p.TripId, p.LocatableId });
+
 
             ApplySnakeCaseNamingConvention(builder);
         }
