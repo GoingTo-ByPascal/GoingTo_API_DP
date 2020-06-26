@@ -14,6 +14,9 @@ namespace GoingTo_API_DP.Domain.Services.Accounts
         Task<VisitResponse> SaveAsync(Visit visit);
         Task<VisitResponse> UpdateAsync(int id, Visit visit);
         Task<VisitResponse> DeleteAsync(int id);
-        
+        Task<VisitResponse> AssignVisitAsync(int tripId, int locatableId);
+        Task<VisitResponse> UnassignVisitAsync(int tripId, int locatableId);
+
+        Task<IEnumerable<Visit>> ListByTripIdAsync(int tripId);
     }
 }

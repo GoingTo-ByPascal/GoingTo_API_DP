@@ -21,6 +21,21 @@ namespace GoingTo_API_DP.Service
             _unitOfWork = unitOfWork;
         }
 
+        public async Task<VisitResponse> AssignVisitAsync(int tripId, int locatableId)
+        {
+            try
+            {
+                await _visitRepository.AssignVisit(tripId, locatableId);
+                await _unitOfWork.CompleteAsync();
+                Visit visit = await _visitRepository.FindByTripIdAndLocatableId(tripId, locatableId);
+                return new VisitResponse(visit);
+            }
+            catch (Exception ex)
+            {
+                return new VisitResponse($"An error ocurred while assigning Trip to Visit: {ex.Message}");
+            }
+        }
+
         public async Task<VisitResponse> DeleteAsync(int id)
         {
             var existingVisit = await _visitRepository.FindById(id);
@@ -52,6 +67,11 @@ namespace GoingTo_API_DP.Service
             return await _visitRepository.ListAsync();
         }
 
+        public async Task<IEnumerable<Visit>> ListByTripIdAsync(int tripId)
+        {
+            return await _visitRepository.ListByTripIdAsync(tripId);
+        }
+
         public async Task<VisitResponse> SaveAsync(Visit visit)
         {
             try
@@ -64,6 +84,21 @@ namespace GoingTo_API_DP.Service
             catch (Exception ex)
             {
                 return new VisitResponse($"An error ocurred while saving place: {ex.Message}");
+            }
+        }
+
+        public async Task<VisitResponse> UnassignVisitAsync(int tripId, int locatableId)
+        {
+            try
+            {
+                Visit visit = await _visitRepository.FindByTripIdAndLocatableId(tripId, locatableId);
+                _visitRepository.Remove(visit);
+                await _unitOfWork.CompleteAsync();
+                return new VisitResponse(visit);
+            }
+            catch (Exception ex)
+            {
+                return new VisitResponse($"An error ocurred while unnasigning Trip to Visit: {ex.Message}");
             }
         }
 
@@ -85,5 +120,6 @@ namespace GoingTo_API_DP.Service
                 return new VisitResponse($"An error ocurred while updating visit: {ex.Message}");
             }
         }
+
     }
 }
