@@ -1,9 +1,11 @@
 
+using GoingTo_API_DP.Domain.Model;
 using GoingTo_API_DP.Domain.Model.Accounts;
 using GoingTo_API_DP.Domain.Model.Business;
 using GoingTo_API_DP.Domain.Model.Geographic;
 using GoingTo_API_DP.Extensions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace GoingTo_API_DP.Domain.Persistence.Context
 {
@@ -20,6 +22,8 @@ namespace GoingTo_API_DP.Domain.Persistence.Context
         public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<PlanUser> PlanUsers { get; set; }
+        public DbSet<Visit> Visits { get; set; }
+        public DbSet<Trip> Trips { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -82,7 +86,10 @@ namespace GoingTo_API_DP.Domain.Persistence.Context
                 .WithOne(p => p.Locatable)
                 .HasForeignKey<Place>(p => p.LocatableId);
 
-
+            builder.Entity<Locatable>()
+                .HasMany(p => p.Visits)
+                .WithOne(p => p.Locatable)
+                .HasForeignKey(p => p.LocatableId);
 
             //Place Entity
 
@@ -128,6 +135,10 @@ namespace GoingTo_API_DP.Domain.Persistence.Context
                 .HasOne(p => p.Profile)
                 .WithOne(p => p.User)
                 .HasForeignKey<UserProfile>(p => p.UserId);
+            builder.Entity<User>()
+                .HasMany(p => p.Trips)
+                .WithOne(p => p.User)
+                .HasForeignKey(p => p.UserId);
 
 
             //UserProfile Entity
@@ -143,7 +154,26 @@ namespace GoingTo_API_DP.Domain.Persistence.Context
             builder.Entity<UserProfile>().Property(p => p.CreatedAt);
             builder.Entity<UserProfile>().Property(p => p.CountryId).IsRequired();
 
+            // Trip Entity
 
+            builder.Entity<Trip>().ToTable("Trips");
+            builder.Entity<Trip>().HasKey(p => p.Id);
+            builder.Entity<Trip>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Trip>().Property(p => p.UserId).IsRequired();
+            builder.Entity<Trip>().Property(p => p.Name).IsRequired();
+            builder.Entity<Trip>().Property(p => p.Description).IsRequired();
+            builder.Entity<Trip>()
+                .HasMany(p => p.Visits)
+                .WithOne(p => p.Trip)
+                .HasForeignKey(p => p.TripId);
+
+
+            // Visit Entity
+
+            builder.Entity<Visit>().ToTable("Visits");
+            builder.Entity<Visit>().HasKey(p => p.Id);
+            builder.Entity<Visit>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
+            
 
             ApplySnakeCaseNamingConvention(builder);
         }

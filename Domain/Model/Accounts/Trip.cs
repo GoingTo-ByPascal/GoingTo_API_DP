@@ -23,9 +23,7 @@ namespace GoingTo_API_DP.Domain.Model
         public string Description { get; set; }
         public User User { get; set; }
         public int UserId { get; set; }
-
-        public List<Visit> Visits = new List<Visit>();
-
+        public List<Visit> Visits { get; set; } = new List<Visit>();
         public void Past()
         {
             CurrentState.Past(this);

@@ -1,4 +1,5 @@
 
+using GoingTo_API_DP.Domain.Model;
 using GoingTo_API_DP.Domain.Model.Accounts;
 using GoingTo_API_DP.Domain.Model.Business;
 using GoingTo_API_DP.Domain.Model.Geographic;
@@ -18,6 +19,7 @@ namespace GoingTo_API_DP.Mapping
             CreateMap<Plan, PlanResource>();
             CreateMap<PlanUser, UserPlanResource>();
             CreateMap<UserProfile, UserProfileResource>();
+            CreateMap<Trip, TripResource>();
         }
     }
 }

@@ -15,7 +15,7 @@ namespace GoingTo_API_DP.Domain.Model.Geographic
         public City City { get; set; }
         public Country Country { get; set; }
         public Place Place { get; set; }
-
+        public IList<Visit> Visits { get; set; } = new List<Visit>();
 
     }
 }
