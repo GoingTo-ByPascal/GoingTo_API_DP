@@ -23,7 +23,7 @@ namespace GoingTo_API_DP.Domain.Model
         public int LocatableId { get; set; }
         public Trip Trip { get; set; }
         public int TripId { get; set; }
-        public string StateName;
+        public string StateName { get; set; }
         
         public void SetState(IState<Visit> state)
         {

@@ -162,7 +162,7 @@ namespace GoingTo_API_DP.Domain.Persistence.Context
             builder.Entity<Trip>().Property(p => p.UserId).IsRequired();
             builder.Entity<Trip>().Property(p => p.Name).IsRequired();
             builder.Entity<Trip>().Property(p => p.Description).IsRequired();
-            builder.Entity<Trip>().Property(p => p.StateName);
+            builder.Entity<Trip>().Property(p => p.StateName).IsRequired();
             builder.Entity<Trip>()
                 .HasMany(p => p.Visits)
                 .WithOne(p => p.Trip)
@@ -174,7 +174,7 @@ namespace GoingTo_API_DP.Domain.Persistence.Context
             builder.Entity<Visit>().ToTable("Visits");
             builder.Entity<Visit>().HasKey(p => p.Id);
             builder.Entity<Visit>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
-            builder.Entity<Visit>().Property(p => p.StateName);
+            builder.Entity<Visit>().Property(p => p.StateName).IsRequired();
             builder.Entity<Visit>().HasKey(p => new { p.TripId, p.LocatableId });
 
 
