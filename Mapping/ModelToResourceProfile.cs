@@ -20,6 +20,7 @@ namespace GoingTo_API_DP.Mapping
             CreateMap<PlanUser, UserPlanResource>();
             CreateMap<UserProfile, UserProfileResource>();
             CreateMap<Trip, TripResource>();
+            CreateMap<Visit, VisitResource>();
         }
     }
 }

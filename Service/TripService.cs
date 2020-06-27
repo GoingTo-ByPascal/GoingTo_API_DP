@@ -48,6 +48,22 @@ namespace GoingTo_API_DP.Service
             
         }
 
+        public async Task<TripResponse> GetTripState(int id)
+        {
+            var existingTrip = await _tripRepository.FindById(id);
+            if (existingTrip == null)
+                return new TripResponse("Trip not found");
+            try
+            {
+                await _unitOfWork.CompleteAsync();
+                return new TripResponse(existingTrip.StateName);
+            }
+            catch (Exception ex)
+            {
+                return new TripResponse($"An error ocurred while getting the state: {ex.Message}");
+            }
+        }
+
         public async Task<IEnumerable<Trip>> ListAsync()
         {
             return await _tripRepository.ListAsync();
@@ -70,6 +86,40 @@ namespace GoingTo_API_DP.Service
             catch(Exception ex)
             {
                 return new TripResponse($"An error ocurred while saving this trip: {ex.Message}");
+            }
+        }
+
+        public async Task<TripResponse> TripFutureState(int id)
+        {
+            var existingTrip = await _tripRepository.FindById(id);
+            if (existingTrip == null)
+                return new TripResponse("Trip not found");
+            existingTrip.Future();
+            try
+            {
+                await _unitOfWork.CompleteAsync();
+                return new TripResponse(existingTrip);
+            }
+            catch (Exception ex)
+            {
+                return new TripResponse($"An error ocurred while modifing the state: {ex.Message}");
+            }
+        }
+
+        public async Task<TripResponse> TripPastState(int id)
+        {
+            var existingTrip = await _tripRepository.FindById(id);
+            if (existingTrip == null)
+                return new TripResponse("Trip not found");
+            existingTrip.Past();
+            try
+            {
+                await _unitOfWork.CompleteAsync();
+                return new TripResponse(existingTrip);
+            }
+            catch (Exception ex)
+            {
+                return new TripResponse($"An error ocurred while modifing the state: {ex.Message}");
             }
         }
 

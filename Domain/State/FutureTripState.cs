@@ -17,6 +17,7 @@ namespace GoingTo_API_DP.Domain
         public void Past(Trip trip)
         {
             trip.Past();
+            trip.StateName = "Past";
         }
     }
 }

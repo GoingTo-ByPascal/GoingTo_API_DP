@@ -56,6 +56,7 @@ namespace GoingTo_API_DP
             services.AddScoped<ILocatableRepository, LocatableRepository>();
             services.AddScoped<IPlaceRepository, PlaceRepository>();
             services.AddScoped<ITripRepository, TripRepository>();
+            services.AddScoped<IVisitRepository, VisitRepository>();
 
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IUserProfileService, ProfileService>();
@@ -66,6 +67,7 @@ namespace GoingTo_API_DP
             services.AddScoped<ILocatableService, LocatableService>();
             services.AddScoped<IPlaceService, PlaceService>();
             services.AddScoped<ITripService, TripService>();
+            services.AddScoped<IVisitService, VisitService>();
 
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();

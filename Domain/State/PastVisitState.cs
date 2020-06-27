@@ -12,6 +12,7 @@ namespace GoingTo_API_DP.Domain
         public void Future(Visit visit)
         {
             visit.Future();
+            visit.StateName = "Future";
         }
 
         public void Past(Visit visit)

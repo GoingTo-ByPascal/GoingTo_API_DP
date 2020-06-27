@@ -15,7 +15,8 @@ namespace GoingTo_API_DP.Domain.Services.Accounts
         Task<TripResponse> UpdateAsync(int id, Trip trip);
         Task<TripResponse> DeleteAsync(int id);
         Task<IEnumerable<Trip>> ListByUserIdAsync(int userId);
-      
-
+        Task<TripResponse> GetTripState(int id);
+        Task<TripResponse> TripPastState(int id);
+        Task<TripResponse> TripFutureState(int id);
     }
 }
