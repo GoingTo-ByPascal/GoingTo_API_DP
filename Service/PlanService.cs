@@ -92,6 +92,7 @@ namespace GoingTo_API_DP.Services
                 _planRepository.Update(existingPlan);
                 await _unitOfWork.CompleteAsync();
 
+                existingPlan.NotifyObservers();
                 return new PlanResponse(existingPlan);
             }
             catch(Exception ex)
