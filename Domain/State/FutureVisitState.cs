@@ -1,5 +1,6 @@
 ﻿using GoingTo_API_DP.Domain.Model;
 using GoingTo_Library;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,8 +17,8 @@ namespace GoingTo_API_DP.Domain
 
         public void Past(Visit visit)
         {
-            visit.Past();
             visit.StateName = "Past";
+            visit.SetState(new PastVisitState());
         }
     }
 }

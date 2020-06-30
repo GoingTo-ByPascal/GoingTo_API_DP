@@ -27,11 +27,11 @@ namespace GoingTo_API_DP.Domain.Model
         public string StateName { get; set; }
         public void Past()
         {
-            CurrentState.Past(this);
+            this.CurrentState.Past(this);
         }
         public void Future()
         {
-            CurrentState.Future(this);
+            this.CurrentState.Future(this);
         }
     }
 }

@@ -25,13 +25,14 @@ namespace GoingTo_API_DP.Controllers
         }
 
         [HttpPut("{state}")]
-        public async Task<IActionResult> ChangeState(int tripId,string state)
+        public async Task<IActionResult> ChangeState(int tripId,int state)
         {
             var existingTrip = _tripService.FindById(tripId);
             if(existingTrip != null)
             {
-                if (state == "Past" || state == "past")
+                if (state == 1)
                     await _tripService.TripPastState(tripId);
+                else if(state == 0)
                 await _tripService.TripFutureState(tripId);
 
                 var resource = _mapper.Map<Trip, TripResource>(existingTrip.Result.Resource);

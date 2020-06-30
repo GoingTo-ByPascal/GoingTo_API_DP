@@ -97,6 +97,7 @@ namespace GoingTo_API_DP.Service
             existingTrip.Future();
             try
             {
+                _tripRepository.Update(existingTrip);
                 await _unitOfWork.CompleteAsync();
                 return new TripResponse(existingTrip);
             }
@@ -114,6 +115,7 @@ namespace GoingTo_API_DP.Service
             existingTrip.Past();
             try
             {
+                _tripRepository.Update(existingTrip);
                 await _unitOfWork.CompleteAsync();
                 return new TripResponse(existingTrip);
             }

@@ -11,8 +11,8 @@ namespace GoingTo_API_DP.Domain
     {
         public void Future(Trip trip)
         {
-            trip.Future();
             trip.StateName = "Future";
+            trip.SetState(new FutureTripState());
         }
 
         public void Past(Trip trip)

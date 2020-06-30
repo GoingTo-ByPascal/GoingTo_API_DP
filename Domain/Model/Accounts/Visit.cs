@@ -12,13 +12,11 @@ namespace GoingTo_API_DP.Domain.Model
         public Visit(IState<Visit> state)
         {
             CurrentState = state;
-            
         }
         public Visit() : this(new FutureVisitState()) { }
         public int Id { get; set; }
         public DateTime Date { get; set; }
         private IState<Visit> CurrentState { get; set; }
-
         public Locatable Locatable { get; set; }
         public int LocatableId { get; set; }
         public Trip Trip { get; set; }
@@ -32,11 +30,11 @@ namespace GoingTo_API_DP.Domain.Model
 
         public void Past()
         {
-            CurrentState.Past(this);
+            this.CurrentState.Past(this);
         }
         public void Future()
         {
-            CurrentState.Future(this);
+            this.CurrentState.Future(this);
         }
     }
 }

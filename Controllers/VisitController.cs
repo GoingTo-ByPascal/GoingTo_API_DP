@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace GoingTo_API_DP.Controllers
 {
-    [Route("{/api/trips/{tripId}/locatables")]
+    [Route("/api/trips/{tripId}/locatables")]
     public class VisitController : Controller
     {
         private readonly IVisitService _visitService;
