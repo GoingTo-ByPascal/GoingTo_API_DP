@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace GoingTo_API_DP.Controllers
 {
-    [Route("/api/plan/{planId}/user/{userId}")]
+    [Route("/api/plan/{planId}/user/{userId}/")]
     public class PlanUsersController : Controller
     {
         private readonly IUserPlanService _userPlanService;

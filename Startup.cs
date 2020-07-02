@@ -7,11 +7,13 @@ using GoingTo_API_DP.Domain.Persistence.Context;
 using GoingTo_API_DP.Domain.Repositories;
 using GoingTo_API_DP.Domain.Repositories.Accounts;
 using GoingTo_API_DP.Domain.Repositories.Business;
+using GoingTo_API_DP.Domain.Repositories.Geographic;
 using GoingTo_API_DP.Domain.Services;
 using GoingTo_API_DP.Domain.Services.Accounts;
 using GoingTo_API_DP.Domain.Services.Business;
 using GoingTo_API_DP.Persistence;
 using GoingTo_API_DP.Persistence.Repositories;
+using GoingTo_API_DP.Service;
 using GoingTo_API_DP.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -53,6 +55,8 @@ namespace GoingTo_API_DP
             services.AddScoped<ICountryRepository, CountryRepository>();
             services.AddScoped<ILocatableRepository, LocatableRepository>();
             services.AddScoped<IPlaceRepository, PlaceRepository>();
+            services.AddScoped<ITripRepository, TripRepository>();
+            services.AddScoped<IVisitRepository, VisitRepository>();
 
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IUserProfileService, ProfileService>();
@@ -62,6 +66,8 @@ namespace GoingTo_API_DP
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<ILocatableService, LocatableService>();
             services.AddScoped<IPlaceService, PlaceService>();
+            services.AddScoped<ITripService, TripService>();
+            services.AddScoped<IVisitService, VisitService>();
 
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
