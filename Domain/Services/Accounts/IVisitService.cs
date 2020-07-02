@@ -1,5 +1,6 @@
 ﻿using GoingTo_API_DP.Domain.Model;
 using GoingTo_API_DP.Domain.Services.Communications;
+using GoingTo_API_DP.Persistence.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,6 +18,7 @@ namespace GoingTo_API_DP.Domain.Services.Accounts
         Task<VisitResponse> GetVisitState(int id);
         Task<VisitResponse> VisitPastState(int id);
         Task<VisitResponse> VisitFutureState(int id);
+        Task<VisitResponse> VisitNeutralState(int id);
         Task<VisitResponse> FindByVisitId(int id);
     }
 }

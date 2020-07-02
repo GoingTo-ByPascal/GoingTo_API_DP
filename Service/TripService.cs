@@ -78,9 +78,9 @@ namespace GoingTo_API_DP.Service
         {
             try
             {
+                trip.Neutral();
                 await _tripRepository.AddAsync(trip);
                 await _unitOfWork.CompleteAsync();
-
                 return new TripResponse(trip);
             }
             catch(Exception ex)
@@ -95,6 +95,24 @@ namespace GoingTo_API_DP.Service
             if (existingTrip == null)
                 return new TripResponse("Trip not found");
             existingTrip.Future();
+            try
+            {
+                _tripRepository.Update(existingTrip);
+                await _unitOfWork.CompleteAsync();
+                return new TripResponse(existingTrip);
+            }
+            catch (Exception ex)
+            {
+                return new TripResponse($"An error ocurred while modifing the state: {ex.Message}");
+            }
+        }
+
+        public async Task<TripResponse> TripNeutralState(int id)
+        {
+            var existingTrip = await _tripRepository.FindById(id);
+            if (existingTrip == null)
+                return new TripResponse("Trip not found");
+            existingTrip.Neutral();
             try
             {
                 _tripRepository.Update(existingTrip);

@@ -18,5 +18,6 @@ namespace GoingTo_API_DP.Domain.Services.Accounts
         Task<TripResponse> GetTripState(int id);
         Task<TripResponse> TripPastState(int id);
         Task<TripResponse> TripFutureState(int id);
+        Task<TripResponse> TripNeutralState(int id);
     }
 }

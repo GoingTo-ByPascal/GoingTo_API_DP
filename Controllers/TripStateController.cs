@@ -25,15 +25,17 @@ namespace GoingTo_API_DP.Controllers
         }
 
         [HttpPut("{state}")]
-        public async Task<IActionResult> ChangeState(int tripId,int state)
+        public async Task<IActionResult> ChangeState(int tripId,string state)
         {
             var existingTrip = _tripService.FindById(tripId);
             if(existingTrip != null)
             {
-                if (state == 1)
+                if (state == "Past")
                     await _tripService.TripPastState(tripId);
-                else if(state == 0)
-                await _tripService.TripFutureState(tripId);
+                else if (state == "Future")
+                    await _tripService.TripFutureState(tripId);
+                else if (state == "Neutral")
+                    await _tripService.TripNeutralState(tripId);
 
                 var resource = _mapper.Map<Trip, TripResource>(existingTrip.Result.Resource);
 
@@ -41,6 +43,15 @@ namespace GoingTo_API_DP.Controllers
             }
             return BadRequest();
 
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetState(int tripId)
+        {
+            var result = await _tripService.GetTripState(tripId);
+            if (!result.Success)
+                return BadRequest(result.Message);
+            var tripResource = _mapper.Map<Trip, TripResource>(result.Resource);
+            return Ok(tripResource);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using GoingTo_Library.Factory;
+﻿using GoingTo_API_DP.Domain.State;
+using GoingTo_Library.Factory;
 using GoingTo_Library.State;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,8 @@ namespace GoingTo_API_DP.Domain.Model.Accounts
             }
             else
             {
-                return null;
+                trip.SetState(new NeutralTripState());
+                return trip;
             }
 
         }

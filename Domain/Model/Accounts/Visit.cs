@@ -3,6 +3,7 @@ using GoingTo_API_DP.Domain.Model.Geographic;
 using GoingTo_Library;
 using GoingTo_Library.Factory;
 using GoingTo_Library.State;
+using Org.BouncyCastle.Asn1;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,6 +40,11 @@ namespace GoingTo_API_DP.Domain.Model
         {
             Factory.CreateTravelable(this);
             this.CurrentState.Future(this);
+        }
+        public void Neutral()
+        {
+            Factory.CreateTravelable(this);
+            this.CurrentState.Neutral(this);
         }
     }
 }

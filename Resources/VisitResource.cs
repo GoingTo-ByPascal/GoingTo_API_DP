@@ -9,6 +9,7 @@ namespace GoingTo_API_DP.Resources
     {
         public LocatableResource Locatable { get; set; }
         public TripResource Trip { get; set; }
+        public string StateName { get; set; }
     }
 
 }

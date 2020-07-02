@@ -1,4 +1,5 @@
 ﻿using GoingTo_API_DP.Domain.Model;
+using GoingTo_API_DP.Domain.State;
 using GoingTo_Library.Factory;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,8 @@ namespace GoingTo_API_DP.Domain.Factory
             }
             else
             {
-                return null;
+                visit.SetState(new NeutralVisitState());
+                return visit;
             }
         }
     }

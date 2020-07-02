@@ -37,5 +37,10 @@ namespace GoingTo_API_DP.Domain.Model
             Factory.CreateTravelable(this);
             this.CurrentState.Future(this);
         }
+        public void Neutral()
+        {
+            Factory.CreateTravelable(this);
+            this.CurrentState.Neutral(this);
+        }
     }
 }

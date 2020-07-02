@@ -50,9 +50,9 @@ namespace GoingTo_API_DP.Service
         {
             try
             {
+                visit.Neutral();
                 await _visitRepository.AddAsync(visit);
                 await _unitOfWork.CompleteAsync();
-
                 return new VisitResponse(visit);
             }
             catch (Exception ex)
@@ -151,5 +151,21 @@ namespace GoingTo_API_DP.Service
             return new VisitResponse(existingVisit);
         }
 
+        public async Task<VisitResponse> VisitNeutralState(int id)
+        {
+            var existingVisit = await _visitRepository.FindById(id);
+            if (existingVisit == null)
+                return new VisitResponse("Visit not found");
+            existingVisit.Neutral();
+            try
+            {
+                await _unitOfWork.CompleteAsync();
+                return new VisitResponse(existingVisit);
+            }
+            catch (Exception ex)
+            {
+                return new VisitResponse($"An error ocurred while modifing the state: {ex.Message}");
+            }
+        }
     }
 }

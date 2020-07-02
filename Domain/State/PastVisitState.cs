@@ -1,4 +1,5 @@
 ﻿using GoingTo_API_DP.Domain.Model;
+using GoingTo_API_DP.Domain.State;
 using GoingTo_Library;
 using GoingTo_Library.State;
 using System;
@@ -14,6 +15,12 @@ namespace GoingTo_API_DP.Domain
         {
             visit.StateName = "Future";
             visit.SetState(new FutureVisitState());
+        }
+
+        public void Neutral(Visit visit)
+        {
+            visit.StateName = "Neutral";
+            visit.SetState(new NeutralVisitState());
         }
 
         public void Past(Visit visit)

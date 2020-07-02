@@ -34,6 +34,7 @@ namespace GoingTo_API_DP.Controllers
             return resources;
         }
         
+        
         [HttpPost]
         public async Task<IActionResult> CreateUserTrip(int userId, [FromBody] SaveTripResource resource )
         {

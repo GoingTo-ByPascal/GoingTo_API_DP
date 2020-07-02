@@ -23,6 +23,17 @@ namespace GoingTo_API_DP.Controllers
             _mapper = mapper;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetState(int visitId)
+        {
+            var result = await _visitService.GetVisitState(visitId);
+            if (!result.Success)
+                return BadRequest(result.Message);
+            var visitResource = _mapper.Map<Visit, VisitResource>(result.Resource);
+            return Ok(visitResource);
+        }
+       
+
         [HttpPut("{state}")]
         public async Task<IActionResult> ChangeState(int visitId, string state)
         {
@@ -31,7 +42,10 @@ namespace GoingTo_API_DP.Controllers
             {
                 if (state == "Past" || state == "past")
                     await _visitService.VisitPastState(visitId);
-                await _visitService.VisitFutureState(visitId);
+                else if (state == "Future" || state == "future")
+                    await _visitService.VisitFutureState(visitId);
+                else if (state == "Neutral" || state == "neutral")
+                    await _visitService.VisitNeutralState(visitId);
 
                 var resource = _mapper.Map<Visit, VisitResource>(existingTrip.Result.Resource);
 
