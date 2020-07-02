@@ -11,10 +11,11 @@ namespace GoingTo_API_DP.Domain.Model.Accounts
         public int Id { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-//        public Wallet Wallet { get; set; }
+//      public Wallet Wallet { get; set; }
 //      public int WalletId { get; set; }
         public UserProfile Profile { get; set; }
         public List<PlanUser> UserPlans { get; set; }
+        public List<Trip> Trips { get; set; } = new List<Trip>();
 
     }
 }
