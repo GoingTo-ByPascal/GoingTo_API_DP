@@ -1,5 +1,7 @@
 ﻿using GoingTo_API_DP.Domain.Model;
+using GoingTo_API_DP.Domain.State;
 using GoingTo_Library;
+using GoingTo_Library.State;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +16,16 @@ namespace GoingTo_API_DP.Domain
             throw new Exception("The trip is already in the future");
         }
 
+        public void Neutral(Trip trip)
+        {
+            trip.StateName = "Neutral";
+            trip.SetState(new NeutralTripState());
+        }
+
         public void Past(Trip trip)
         {
-            trip.Past();
+            trip.StateName = "Past";
+            trip.SetState(new PastTripState());
         }
     }
 }

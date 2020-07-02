@@ -1,20 +1,18 @@
 ﻿using GoingTo_API_DP.Domain.Model;
-using GoingTo_API_DP.Domain.State;
-using GoingTo_Library;
 using GoingTo_Library.State;
-using Microsoft.AspNetCore.Mvc.Formatters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace GoingTo_API_DP.Domain
+namespace GoingTo_API_DP.Domain.State
 {
-    public class FutureVisitState : IState<Visit>
+    public class NeutralVisitState : IState<Visit>
     {
         public void Future(Visit visit)
         {
-            throw new Exception("The visit is already in future");
+            visit.StateName = "Future";
+            visit.SetState(new FutureVisitState());
         }
 
         public void Neutral(Visit visit)

@@ -16,6 +16,5 @@ namespace GoingTo_API_DP.Domain.Model.Geographic
         public Locatable Locatable { get; set; }
         public IList<UserProfile> Profiles { get; set; } = new List<UserProfile>();
         public IList<City> Cities { get; set; } = new List<City>();
-
     }
 }
